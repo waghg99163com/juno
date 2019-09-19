@@ -51,4 +51,14 @@ public class TestController {
         User user = userTest2Service.selectTest(id);
         return user.getName();
     }
+
+    @RequestMapping("/testAsync")
+    @ResponseBody
+    public String testAsync()
+    {
+        System.out.println("######1######");
+        userTest1Service.sendMsg();
+        System.out.println("######4######");
+        return "success";
+    }
 }

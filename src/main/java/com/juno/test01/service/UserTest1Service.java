@@ -5,6 +5,7 @@ import com.juno.test01.dao.UserMapper1;
 import com.juno.test02.dao.UserMapper2;
 import com.juno.test02.service.UserTest2Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,5 +31,13 @@ public class UserTest1Service {
     public User selectTest(Long id)
     {
         return userMapper1.selectTest(id);
+    }
+
+    @Async
+    public String sendMsg()
+    {
+        System.out.println("######2######");
+        System.out.println("######3######");
+        return "success";
     }
 }
