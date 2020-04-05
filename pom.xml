@@ -5,96 +5,169 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
+        <version>2.1.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.juno</groupId>
     <artifactId>juno</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
     <name>juno</name>
-    <description>Demo project for Spring Boot</description>
+    <description>I LOVE JUNO</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <commons-validator.version>1.6</commons-validator.version>
+        <commons-fileupload.version>1.3.3</commons-fileupload.version>
+        <swagger.version>2.7.0</swagger.version>
+        <fastjson.version>1.2.62</fastjson.version>
+        <druid.version>1.1.10</druid.version>
+        <shiro.version>1.4.1</shiro.version>
+        <jwt.version>3.8.1</jwt.version>
+        <ehcache.version>3.3.1</ehcache.version>
+        <ehcache.core.version>2.6.11</ehcache.core.version>
+        <mybatis.version>2.1.0</mybatis.version>
+        <pagehelper.version>1.2.10</pagehelper.version>
+        <mybatisplus.version>3.1.0</mybatisplus.version>
+        <userAgentUtils.version>1.21</userAgentUtils.version>
+        <cas.version>1.5.0-GA</cas.version>
+        <nacos.version>2.1.0.RELEASE</nacos.version>
+        <jsoup.version>1.11.3</jsoup.version>
+        <http.version>4.5.6</http.version>
+        <xxl.job.core.version>2.1.2</xxl.job.core.version>
+        <aho.corasick.double.array.trie>1.2.1</aho.corasick.double.array.trie>
+        <jsoup.version>1.11.3</jsoup.version>
+        <easypoi-base.version>4.1.0</easypoi-base.version>
+        <easypoi-web.version>4.1.0</easypoi-web.version>
+        <easypoi-annotation.version>4.1.0</easypoi-annotation.version>
+        <guava.version>28.1-jre</guava.version>
+        <bcprov-jdk15on.version>1.60</bcprov-jdk15on.version>
+        <json-lib.version>2.4</json-lib.version>
+        <dom4j.version>1.5</dom4j.version>
+        <jedis.version>2.9.0</jedis.version>
+        <tk.mybatis.version>4.0.4</tk.mybatis.version>
+        <jsqlparser.version>3.0</jsqlparser.version>
+        <oracle.version>11.2.0.3</oracle.version>
+        <axis.version>1.4</axis.version>
+        <axis-wsdl4j.version>1.5.1</axis-wsdl4j.version>
+        <commons-discovery.version>0.5</commons-discovery.version>
+        <httpclient.version>4.5.10</httpclient.version>
+        <httpcore.version>4.4.12</httpcore.version>
+        <ezmorph.version>1.0.6</ezmorph.version>
+        <commons-net.version>3.6</commons-net.version>
+        <activation.version>1.1.1</activation.version>
+        <gson.version>2.8.6</gson.version>
+        <lombok.version>1.18.12</lombok.version>
+        <java-jwt.version>3.10.0</java-jwt.version>
+        <mysql.version>8.0.17</mysql.version>
     </properties>
 
+    <modules>
+        <module>example</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+        <!-- springboot web start 和网关spring-cloud-starter-gateway冲突，集成gateway，必须把该jar包放到各个子项目-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jta-atomikos</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!-- springboot test start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- 没有加该配置的话，@Mapper扫描不到，会为null -->
+        <!-- springboot test end -->
+        <!-- apache工具包 start -->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.3.2</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.6</version>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${commons-validator.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>1.3.2</version>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
         </dependency>
+        <!-- apache工具包 end -->
+        <!-- swagger-ui相关包 start -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <!-- swagger-ui相关包 end -->
+        <!-- servlet api start -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- servlet api end -->
+        <!-- mysql connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.38</version>
+            <version>${mysql.version}</version>
+            <scope>runtime</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.log4j/com.springsource.org.apache.log4j -->
+        <!-- mysql connector end -->
+        <!-- lombok -->
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <!-- lombok end-->
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- fastjson end -->
+        <!-- spring默认使用yml中的配置，但有时候要用传统的xml或properties配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.log4j/com.springsource.org.apache.log4j -->
+        <!--<dependency>
             <groupId>org.apache.log4j</groupId>
             <artifactId>com.springsource.org.apache.log4j</artifactId>
             <version>1.2.16</version>
-        </dependency>
+        </dependency>-->
         <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j</artifactId>
         </dependency>-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
