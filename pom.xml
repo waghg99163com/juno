@@ -66,6 +66,8 @@
 
     <modules>
         <module>example</module>
+        <module>gateway</module>
+        <module>crm</module>
     </modules>
 
     <dependencyManagement>

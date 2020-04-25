@@ -1,0 +1,55 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: GATEWAY
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: CRM
+          uri: lb://CRM
+          predicates:
+            - Path=/crm/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@hostAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 50
+              # 熔断降级配置
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: 'forward:/fallback'
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 200
+        #最大阻塞等待时间,负值表示不超时
+        max-wait: -1
+        #连接池中最大空闲连接
+        max-idle: 10
+        #连接池中最小空闲连接
+        min-idle: 5
+    #redis超时配置,单位毫秒
+    timeout: 20000
+ribbon:
+  eager-load:
+    enabled: true
+    clients: CRM
+
+cas:
+  serverUrlPrefix: http://localhost:8222/cas
+  serverLoginUrl: http://localhost:8222/cas/login
+  clientHostUrl: http://localhost:9999
+  validationType: CAS
+  useSession: true
+
+
